@@ -37,7 +37,7 @@ namespace Items.RollbackEngine.Either
                 try
                 {
                     TOut result = action.Execute(successfulResult.Result);
-                    return new SuccessfulResult<TOut>(result, successfulResult.RollbackList.Append(action));
+                    return new SuccessfulResult<TOut>(result, successfulResult.RollbackList.Prepend(action));
                 }
                 catch (Exception)
                 {
