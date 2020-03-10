@@ -1,16 +1,20 @@
 ﻿using System;
 using Items.Common;
+using Items.Common.Utils;
 using Items.RollbackEngine;
 
 namespace Items.ConsoleApp
 {
     internal sealed class Program
     {
+        private static readonly PrefixLogger Logger = PrefixLogger.Create(nameof(Program));
+
+
         private static int Main(string[] args)
         {
             try
             {
-                Console.WriteLine("Console application started.");
+                Logger.Message("Console application started.");
 
                 RunModules();
 
@@ -18,16 +22,14 @@ namespace Items.ConsoleApp
             }
             catch (Exception ex)
             {
-                string exceptionMessage = $"Exception occurred in {nameof(Main)} method. " +
-                                          $"{Environment.NewLine}{ex.ToString()}";
-                Console.WriteLine(exceptionMessage);
+                Logger.Exception(ex, $"Exception occurred in {nameof(Main)} method.");
 
                 return -1;
             }
             finally
             {
-                Console.WriteLine("Console application stopped.");
-                Console.WriteLine("Press any key to close this window...");
+                Logger.Message("Console application stopped.");
+                Logger.Message("Press any key to close this window...");
                 Console.ReadKey();
             }
         }

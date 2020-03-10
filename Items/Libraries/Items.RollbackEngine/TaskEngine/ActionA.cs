@@ -1,6 +1,6 @@
-﻿namespace Items.RollbackEngine
+﻿namespace Items.RollbackEngine.TaskEngine
 {
-    public sealed class ActionA : IStatefullTask<State>
+    public sealed class ActionA : IStatefulTask<State>
     {
         private int _tempState;
 

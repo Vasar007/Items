@@ -1,12 +1,12 @@
-﻿namespace Items.RollbackEngine
+﻿namespace Items.RollbackEngine.TaskEngine
 {
-    public sealed class ActionB : IStatefullTask<State>
+    public sealed class ActionB : IStatefulTask<State>
     {
         public ActionB()
         {
         }
 
-        #region IStatefullTask<State> Imlementation
+        #region IStatefulTask<State> Imlementation
 
         public State DoAction(State state)
         {

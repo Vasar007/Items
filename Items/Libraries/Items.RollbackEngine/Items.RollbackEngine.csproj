@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Items.Common\Items.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Saga\" />
+  </ItemGroup>
+
 </Project>

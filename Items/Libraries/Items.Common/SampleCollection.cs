@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using Items.Common.Utils;
 
 namespace Items.Common
 {
     public sealed class SampleCollection : Dictionary<string, Action>
     {
+        private static readonly PrefixLogger Logger = PrefixLogger.Create(nameof(SampleCollection));
+
+
         public SampleCollection()
         {
         }
@@ -16,9 +20,11 @@ namespace Items.Common
 
         public void RunAll()
         {
-            foreach ((string sampleId, Action action) in this)
+            foreach ((string sampleId, Action sample) in this)
             {
-                action();
+                Logger.Message($"Run sample '{sampleId}'.");
+                sample();
+                Logger.Message($"Sample '{sampleId}' was finished.{Environment.NewLine}");
             }
         }
 
@@ -26,7 +32,9 @@ namespace Items.Common
         {
             if (TryGetValue(sampleId, out Action sample))
             {
+                Logger.Message($"Run sample '{sampleId}'.");
                 sample();
+                Logger.Message($"Sample '{sampleId}' was finished.{Environment.NewLine}");
             }
 
             throw new ArgumentException(

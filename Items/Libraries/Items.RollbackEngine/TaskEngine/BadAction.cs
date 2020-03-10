@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace Items.RollbackEngine
+namespace Items.RollbackEngine.TaskEngine
 {
-    public sealed class BadAction : IStatefullTask<State>
+    public sealed class BadAction : IStatefulTask<State>
     {
         public BadAction()
         {
         }
 
-        #region IStatefullTask<State> Implementation
+        #region IStatefulTask<State> Implementation
 
         public State DoAction(State state)
         {

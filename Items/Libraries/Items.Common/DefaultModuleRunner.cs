@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Acolyte.Assertions;
+using Items.Common.Utils;
 
 namespace Items.Common
 {
     internal sealed class DefaultModuleRunner : IModuleRunner
     {
+        private static readonly PrefixLogger Logger = PrefixLogger.Create(nameof(DefaultModuleRunner));
+
         private readonly List<ISamplesModule> _samplesModules;
 
 
@@ -21,6 +24,7 @@ namespace Items.Common
             samplesModule.ThrowIfNull(nameof(samplesModule));
 
             _samplesModules.Add(samplesModule);
+            Logger.Message($"Sample module '{samplesModule.ModuleName}' was registered to run.");
         }
 
         public void Run()
@@ -34,8 +38,10 @@ namespace Items.Common
 
             foreach (ISamplesModule samplesModule in _samplesModules)
             {
+                Logger.Message($"Run sample module '{samplesModule.ModuleName}'.{Environment.NewLine}");
                 ISamplesRunner samplesRunner = runnerFactory(samplesModule);
                 RunInternal(samplesRunner);
+                Logger.Message($"Sample module '{samplesModule.ModuleName}' was finished.{Environment.NewLine}");
             }
         }
 
