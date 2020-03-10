@@ -21,8 +21,8 @@ namespace Items.RollbackEngine
             return new SampleCollection
             {
                 { "RollbackEngine.TaskEngine", RunTaskEngineSample },
-                { "RollbackEngine.Either", TestEitherMonadSample },
-                { "RollbackEngine.Saga", TestSagaEngineSample }
+                { "RollbackEngine.Either", RunEitherMonadSample },
+                { "RollbackEngine.Saga", RunSagaEngineSample }
             };
         }
 
@@ -40,7 +40,7 @@ namespace Items.RollbackEngine
 
         #region Either
 
-        public static void TestEitherMonadSample()
+        public static void RunEitherMonadSample()
         {
             var actionOne = new ActionOne();
             var actionTwo = new ActionTwo();
@@ -56,7 +56,7 @@ namespace Items.RollbackEngine
 
         private static ActivityHost[] s_processes = Array.Empty<ActivityHost>();
 
-        public static void TestSagaEngineSample()
+        public static void RunSagaEngineSample()
         {
             var routingSlip = new RoutingSlip(new WorkItem[]
             {
