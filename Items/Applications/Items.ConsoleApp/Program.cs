@@ -2,6 +2,7 @@
 using Items.Common;
 using Items.Common.Utils;
 using Items.RollbackEngine;
+using Items.StateMachine;
 
 namespace Items.ConsoleApp
 {
@@ -39,6 +40,7 @@ namespace Items.ConsoleApp
             IModuleRunner moduleRunner = InfrastructureFactory.CreateModuleRunner();
 
             moduleRunner.RegisterModule(new RollbackEngineSamples());
+            moduleRunner.RegisterModule(new StateMachineSamples());
 
             moduleRunner.Run();
         }

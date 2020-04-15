@@ -1,10 +1,10 @@
-﻿namespace Items.RollbackEngine.TaskEngine
+﻿namespace Items.StateMachine.States
 {
     public sealed class State
     {
-        public int A { get; }
+        public int A { get; set; }
 
-        public int B { get; }
+        public int B { get; set; }
 
 
         public State(

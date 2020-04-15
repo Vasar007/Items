@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup Label="Globals">
-        <Platforms>x64</Platforms>
-    </PropertyGroup>
+  <PropertyGroup Label="Globals">
+    <Platforms>x64</Platforms>
+  </PropertyGroup>
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -13,11 +13,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Items.Common\Items.Common.csproj" />
+    <None Include="..\..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Saga\" />
+    <ProjectReference Include="..\Items.Common\Items.Common.csproj" />
   </ItemGroup>
 
 </Project>

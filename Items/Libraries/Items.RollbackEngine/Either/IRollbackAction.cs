@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Items.RollbackEngine.Either
 {
@@ -6,8 +7,10 @@ namespace Items.RollbackEngine.Either
     {
         Boolean TryRollbackSafe();
     }
+
     public interface IRollbackAction<TIn, TOut> : IRollbackAction
     {
-        TOut Execute(TIn parameter);
+        [return: MaybeNull]
+        TOut Execute([AllowNull] TIn parameter);
     }
 }

@@ -11,9 +11,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9C63D1B3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Items.RollbackEngine", "Libraries\Items.RollbackEngine\Items.RollbackEngine.csproj", "{ECD1989A-81F4-497E-AF4F-677E6097B32D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Items.Common", "Libraries\Items.Common\Items.Common.csproj", "{CA76711D-0352-4D3C-B028-4F70E941E09D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Items.Common", "Libraries\Items.Common\Items.Common.csproj", "{CA76711D-0352-4D3C-B028-4F70E941E09D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Items.ConsoleApp", "Applications\Items.ConsoleApp\Items.ConsoleApp.csproj", "{EDCC4D8C-36D4-4822-9C2C-D5BB897FA355}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Items.ConsoleApp", "Applications\Items.ConsoleApp\Items.ConsoleApp.csproj", "{EDCC4D8C-36D4-4822-9C2C-D5BB897FA355}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Items.StateMachine", "Libraries\Items.StateMachine\Items.StateMachine.csproj", "{93CCE5F7-0AAA-45C6-B281-CA19A2B673F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D860EF81-92F8-4276-A46D-8E1E18E53670}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +40,10 @@ Global
 		{EDCC4D8C-36D4-4822-9C2C-D5BB897FA355}.Debug|x64.Build.0 = Debug|x64
 		{EDCC4D8C-36D4-4822-9C2C-D5BB897FA355}.Release|x64.ActiveCfg = Release|x64
 		{EDCC4D8C-36D4-4822-9C2C-D5BB897FA355}.Release|x64.Build.0 = Release|x64
+		{93CCE5F7-0AAA-45C6-B281-CA19A2B673F0}.Debug|x64.ActiveCfg = Debug|x64
+		{93CCE5F7-0AAA-45C6-B281-CA19A2B673F0}.Debug|x64.Build.0 = Debug|x64
+		{93CCE5F7-0AAA-45C6-B281-CA19A2B673F0}.Release|x64.ActiveCfg = Release|x64
+		{93CCE5F7-0AAA-45C6-B281-CA19A2B673F0}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +52,7 @@ Global
 		{ECD1989A-81F4-497E-AF4F-677E6097B32D} = {3F8F8E14-C882-4405-9C1A-0D83D11C02A8}
 		{CA76711D-0352-4D3C-B028-4F70E941E09D} = {3F8F8E14-C882-4405-9C1A-0D83D11C02A8}
 		{EDCC4D8C-36D4-4822-9C2C-D5BB897FA355} = {82DD41BC-5062-4131-BA8E-117EC007C1EC}
+		{93CCE5F7-0AAA-45C6-B281-CA19A2B673F0} = {3F8F8E14-C882-4405-9C1A-0D83D11C02A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F6EDFA2-0E6D-48D9-90F4-EA0C03EFAA93}

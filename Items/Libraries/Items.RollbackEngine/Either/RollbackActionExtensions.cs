@@ -26,27 +26,34 @@ namespace Items.RollbackEngine.Either
             action.ThrowIfNull(nameof(action));
             parameter.ThrowIfNull(nameof(parameter));
 
-            if (parameter is FailedResult failedResult)
+            switch (parameter)
             {
-                failedResult.Exception.Rethrow();
-                throw new Exception(); // Unreachable code.
-            }
-
-            if (parameter is SuccessfulResult<TIn> successfulResult)
-            {
-                try
+                case FailedResult failedResult:
                 {
-                    TOut result = action.Execute(successfulResult.Result);
-                    return new SuccessfulResult<TOut>(result, successfulResult.RollbackList.Prepend(action));
+                    failedResult.Exception.Rethrow();
+                    throw new Exception(); // Unreachable code.
                 }
-                catch (Exception)
+
+                case SuccessfulResult<TIn> successfulResult:
                 {
-                    successfulResult.RollbackList.TryRollbackSafe();
-                    throw;
+                    try
+                    {
+
+                        TOut result = action.Execute(successfulResult.Result);
+                        return new SuccessfulResult<TOut>(result, successfulResult.RollbackList.Prepend(action));
+                    }
+                    catch (Exception)
+                    {
+                        successfulResult.RollbackList.TryRollbackSafe();
+                        throw;
+                    }
+                }
+
+                default:
+                {
+                    throw new ArgumentException("Invalid parameter.", nameof(parameter));
                 }
             }
-
-            throw new ArgumentException("Invalid parameter.", nameof(parameter));
         }
 
         public static IRollbackActionResult<TOut> Bind<TIn, TOut>(this IRollbackActionResult<TIn> parameter, IRollbackAction<TIn, TOut> action)
