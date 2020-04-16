@@ -19,7 +19,7 @@
 
         public override string ToString()
         {
-            return $"[{nameof(State)}] {nameof(A)}: {A}, {nameof(B)}: {B}";
+            return $"[{nameof(State)}] {nameof(A)}: {A.ToString()}, {nameof(B)}: {B.ToString()}";
         }
 
         #endregion
