@@ -10,7 +10,6 @@ namespace Items.StateMachine.Executors
         IStateMachineExecutor<TState>
         where TState : class
     {
-
         private readonly IStatefulTask<TState> _initialTask;
 
         public TState State { get; }
@@ -52,9 +51,7 @@ namespace Items.StateMachine.Executors
 
         public void Reset()
         {
-            // Cannot reset state because it requieres deep copy to save it in ctor
-            // and copy back in Reset method.
-            Current = _initialTask;
+            throw new NotImplementedException("Reset method is not implemented.");
         }
 
         #endregion

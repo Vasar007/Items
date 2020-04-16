@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Items.StateMachine.Executors;
+﻿using Items.StateMachine.Executors;
 using Items.StateMachine.States;
 
 namespace Items.StateMachine.Common
