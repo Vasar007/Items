@@ -33,12 +33,12 @@ namespace Items.StateMachine
         public static void RunSimpleStateMachineSample()
         {
             var initialState = new State(42, 1337);
-            var initialAction = new TaskA();
+            var initialAction = new TaskC();
 
             State finalState = StateMachineHelper.PerformCasual(initialState, initialAction);
 
             Logger.SkipLine();
-            var initialAction2 = new TaskC();
+            var initialAction2 = new TaskA();
 
             State finalState2 = StateMachineHelper.PerformCasual(initialState, initialAction2);
         }
@@ -46,19 +46,26 @@ namespace Items.StateMachine
         public static void RunStateMachineUntilFinishEnumeratorSample()
         {
             var initialState = new State(42, 1337);
-            var initialAction = new TaskA();
+            var initialAction = new TaskC();
 
             Logger.Message($"Initial state: {initialState}");
             Logger.Message("Starting performing.");
-            State finalState = initialAction.PerformUntilFinalState(initialState).Execute();
+            State finalState = initialAction
+                .PerformUntilFinalState(initialState)
+                .Execute();
+
             Logger.Message($"Final state: {finalState}");
 
             Logger.SkipLine();
-            var initialAction2 = new TaskC();
+            var initialAction2 = new TaskA();
 
             Logger.Message($"Initial state: {initialState}");
             Logger.Message("Starting performing.");
-            State finalState2 = initialAction2.PerformUntilFinalState(initialState).Execute();
+            State finalState2 = initialAction2
+                .PerformUntilFinalState(initialState)
+                .CatchExceptions()
+                .Execute();
+
             Logger.Message($"Final state: {finalState2}");
         }
     }

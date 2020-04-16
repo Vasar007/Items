@@ -1,4 +1,6 @@
-﻿namespace Items.StateMachine.States
+﻿using System;
+
+namespace Items.StateMachine.States
 {
     public sealed class TaskA : IStatefulTask<State>
     {
@@ -19,6 +21,7 @@
                 state.B = 42;
             }
 
+            throw new Exception("Something goes wrong.");
             return new TaskC();
         }
 

@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Acolyte.Assertions;
 using Items.StateMachine.States;
 
 namespace Items.StateMachine.Executors
 {
     internal sealed class StateMachineUntilFinalStateExecutor<TState> :
-        IStateMachineExecutor<TState>
+        StateMachineBaseExecutor<TState>
         where TState : class
     {
         private readonly IStatefulTask<TState> _initialTask;
 
-        public TState State { get; }
+        private IStatefulTask<TState> _current;
 
-        public IStatefulTask<TState> Current { get; private set; }
+        public override TState State { get; }
 
-        object IEnumerator.Current => Current;
+        public override IStatefulTask<TState> Current => _current;
 
 
         public StateMachineUntilFinalStateExecutor(
@@ -26,53 +24,29 @@ namespace Items.StateMachine.Executors
             State = initialState.ThrowIfNull(nameof(initialTask));
             _initialTask = initialTask.ThrowIfNull(nameof(initialTask));
 
-            Current = initialTask;
+            _current = initialTask;
         }
-
-        #region IDisposable Implementation
-
-        public void Dispose()
-        {
-            // Nothing to dispose.
-        }
-
-        #endregion
 
         #region IEnumerator Implementation
 
-        public bool MoveNext()
+        public override bool MoveNext()
         {
-            bool isFinal = Current.IsFinal;
+            bool isFinal = _current.IsFinal;
 
             // Perform the task before getting IsFinal flag because it can be changed.
-            Current = Current.DoAction(State);
+            _current = _current.DoAction(State);
             return !isFinal;
-        }
-
-        public void Reset()
-        {
-            throw new NotImplementedException("Reset method is not implemented.");
         }
 
         #endregion
 
         #region IEnumerator<IStatefulTask<TState>> Implementation
 
-        public IEnumerator<IStatefulTask<TState>> GetEnumerator()
+        public override IEnumerator<IStatefulTask<TState>> GetEnumerator()
         {
             return new StateMachineUntilFinalStateExecutor<TState>(State, _initialTask);
         }
 
         #endregion
-
-        #region IEnumerator
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
-        #endregion
-
     }
 }

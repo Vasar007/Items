@@ -1,4 +1,5 @@
-﻿using Items.StateMachine.Executors;
+﻿using System;
+using Items.StateMachine.Executors;
 using Items.StateMachine.States;
 
 namespace Items.StateMachine.Common
@@ -10,6 +11,20 @@ namespace Items.StateMachine.Common
             where TState : class
         {
             return new StateMachineUntilFinalStateExecutor<TState>(initialState, initialTask);
+        }
+
+        public static IStateMachineExecutor<TState> CatchExceptions<TState>(
+            this IStateMachineExecutor<TState> executor, Action<Exception>? handler)
+            where TState : class
+        {
+            return new StateMachineSafeExecutor<TState>(executor, handler);
+        }
+
+        public static IStateMachineExecutor<TState> CatchExceptions<TState>(
+            this IStateMachineExecutor<TState> executor)
+            where TState : class
+        {
+            return executor.CatchExceptions(handler: null);
         }
 
         public static TState Execute<TState>(
