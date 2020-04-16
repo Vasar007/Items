@@ -16,9 +16,9 @@ namespace Items.StateMachine.Common
             this IStateMachineExecutor<TState> statefulTasks)
             where TState : class
         {
-            foreach (var _ in statefulTasks)
+            foreach (IStatefulTask<TState> _ in statefulTasks)
             {
-                // All actions performs in MoveNext.
+                // All actions perform in MoveNext.
             }
 
             return statefulTasks.State;
