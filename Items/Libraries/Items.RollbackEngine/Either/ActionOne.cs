@@ -1,11 +1,11 @@
 ﻿using System;
-using Items.Common.Utils;
+using Items.Common.Logging;
 
 namespace Items.RollbackEngine.Either
 {
     internal sealed class ActionOne : IRollbackAction<int, int>
     {
-        private static readonly PrefixLogger Logger = PrefixLogger.Create(nameof(ActionOne));
+        private static readonly ILogger Logger = LoggerFactory.CreateLoggerFor<ActionOne>();
 
 
         public ActionOne()

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Acolyte.Assertions;
-using Items.Common.Utils;
+using Items.Common.Logging;
 
 namespace Items.RollbackEngine.Either
 {
     public sealed class RollbackScope : IDisposable
     {
-        private static readonly PrefixLogger Logger = PrefixLogger.Create(nameof(RollbackScope));
+        private static readonly ILogger Logger = LoggerFactory.CreateLoggerFor<RollbackScope>();
 
         private readonly Stack<IRollbackAction> _rollbackActions;
 

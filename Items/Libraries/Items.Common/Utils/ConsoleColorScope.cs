@@ -7,7 +7,9 @@ namespace Items.Common.Utils
     {
         private readonly ConsoleColor _resetColor;
 
-        public ConsoleColorScope(ConsoleColor consoleColor, ConsoleColor resetColor = ConsoleColor.White)
+        public ConsoleColorScope(
+            ConsoleColor consoleColor,
+            ConsoleColor resetColor = ConsoleColor.White)
         {
             _resetColor = resetColor.ThrowIfEnumValueIsUndefined(nameof(resetColor));
             Console.ForegroundColor = consoleColor.ThrowIfEnumValueIsUndefined(nameof(consoleColor));

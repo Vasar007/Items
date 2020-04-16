@@ -1,14 +1,14 @@
 ﻿using System;
 using Items.Common;
-using Items.Common.Utils;
+using Items.Common.Logging;
 using Items.RollbackEngine;
 using Items.StateMachine;
 
 namespace Items.ConsoleApp
 {
-    internal sealed class Program
+    internal static class Program
     {
-        private static readonly PrefixLogger Logger = PrefixLogger.Create(nameof(Program));
+        private static readonly ILogger Logger = LoggerFactory.CreateLoggerFor(typeof(Program));
 
 
         private static int Main(string[] args)

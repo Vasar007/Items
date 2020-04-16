@@ -1,9 +1,10 @@
 ﻿using System;
 using Acolyte.Assertions;
+using Items.Common.Utils;
 
-namespace Items.Common.Utils
+namespace Items.Common.Logging
 {
-    public sealed class PrefixLogger
+    internal sealed class PrefixLogger : ILogger
     {
         private readonly string _prefix;
 
@@ -17,6 +18,8 @@ namespace Items.Common.Utils
         {
             return new PrefixLogger(prefix);
         }
+
+        #region ILogger Implementation
 
         public void Debug(string message)
         {
@@ -65,5 +68,12 @@ namespace Items.Common.Utils
 
             Console.Error.WriteLine($"Exception: {_prefix} {ex}");
         }
+
+        public void SkipLine()
+        {
+            Console.Out.WriteLine();
+        }
+
+        #endregion
     }
 }

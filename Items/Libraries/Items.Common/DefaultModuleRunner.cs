@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Acolyte.Assertions;
-using Items.Common.Utils;
+using Items.Common.Logging;
 
 namespace Items.Common
 {
     internal sealed class DefaultModuleRunner : IModuleRunner
     {
-        private static readonly PrefixLogger Logger = PrefixLogger.Create(nameof(DefaultModuleRunner));
+        private static readonly ILogger Logger =
+            LoggerFactory.CreateLoggerFor<DefaultModuleRunner>();
 
         private readonly List<ISamplesModule> _samplesModules;
 

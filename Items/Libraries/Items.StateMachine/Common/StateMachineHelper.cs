@@ -1,13 +1,13 @@
 ﻿using System;
-using Items.Common.Utils;
+using Items.Common.Logging;
 using Items.StateMachine.States;
 
 namespace Items.StateMachine.Common
 {
     public static class StateMachineHelper
     {
-        private static readonly PrefixLogger Logger =
-            PrefixLogger.Create(nameof(StateMachineHelper));
+        private static readonly ILogger Logger =
+            LoggerFactory.CreateLoggerFor(typeof(StateMachineHelper));
 
         public static TState PerformCasual<TState>(TState initialState,
             IStatefulTask<TState> initialTask)

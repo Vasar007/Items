@@ -1,11 +1,12 @@
 ﻿using System;
-using Items.Common.Utils;
+using Items.Common.Logging;
 
 namespace Items.RollbackEngine.Saga
 {
     internal sealed class ReserveCarActivity : Activity
     {
-        private static readonly PrefixLogger Logger = PrefixLogger.Create(nameof(ReserveCarActivity));
+        private static readonly ILogger Logger =
+            LoggerFactory.CreateLoggerFor<ReserveCarActivity>();
 
         private static readonly Random Rnd = new Random(2);
 

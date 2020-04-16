@@ -1,5 +1,5 @@
 ﻿using Items.Common;
-using Items.Common.Utils;
+using Items.Common.Logging;
 using Items.StateMachine.Common;
 using Items.StateMachine.States;
 
@@ -7,8 +7,8 @@ namespace Items.StateMachine
 {
     public sealed class StateMachineSamples : ISamplesModule
     {
-        private static readonly PrefixLogger Logger =
-            PrefixLogger.Create(nameof(StateMachineSamples));
+        private static readonly ILogger Logger =
+            LoggerFactory.CreateLoggerFor<StateMachineSamples>();
 
         public string ModuleName { get; } = nameof(StateMachineSamples);
 
@@ -37,7 +37,7 @@ namespace Items.StateMachine
 
             State finalState = StateMachineHelper.PerformCasual(initialState, initialAction);
 
-            Logger.Message(string.Empty);
+            Logger.SkipLine();
             var initialAction2 = new TaskC();
 
             State finalState2 = StateMachineHelper.PerformCasual(initialState, initialAction2);
@@ -53,6 +53,7 @@ namespace Items.StateMachine
             State finalState = initialAction.PerformUntilFinalState(initialState).Execute();
             Logger.Message($"Final state: {finalState}");
 
+            Logger.SkipLine();
             var initialAction2 = new TaskC();
 
             Logger.Message($"Initial state: {initialState}");

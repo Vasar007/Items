@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Items.Common.Utils;
+using Items.Common.Logging;
 
 namespace Items.RollbackEngine.Saga
 {
     internal class RoutingSlip
     {
-        private static readonly PrefixLogger Logger = PrefixLogger.Create(nameof(RoutingSlip));
+        private static readonly ILogger Logger = LoggerFactory.CreateLoggerFor<RoutingSlip>();
 
         private readonly Stack<WorkLog> _completedWorkLogs = new Stack<WorkLog>();
         private readonly Queue<WorkItem> _nextWorkItem = new Queue<WorkItem>();

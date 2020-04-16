@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Items.Common.Utils;
+using Items.Common.Logging;
 
 namespace Items.Common
 {
     public sealed class SampleCollection : Dictionary<string, Action>
     {
-        private static readonly PrefixLogger Logger = PrefixLogger.Create(nameof(SampleCollection));
+        private static readonly ILogger Logger =
+            LoggerFactory.CreateLoggerFor<SampleCollection>();
 
 
         public SampleCollection()

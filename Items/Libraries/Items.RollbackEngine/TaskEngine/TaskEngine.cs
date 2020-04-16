@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Items.Common.Utils;
+using Items.Common.Logging;
 
 namespace Items.RollbackEngine.TaskEngine
 {
     internal sealed class TaskEngine
     {
-        private static readonly PrefixLogger Logger = PrefixLogger.Create(nameof(TaskEngine));
+        private static readonly ILogger Logger = LoggerFactory.CreateLoggerFor<TaskEngine>();
 
         private List<IStatefulTask<State>> Actions { get; }
 

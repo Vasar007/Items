@@ -1,11 +1,12 @@
 ﻿using System;
-using Items.Common.Utils;
+using Items.Common.Logging;
 
 namespace Items.RollbackEngine.Saga
 {
     internal sealed class ReserveHotelActivity : Activity
     {
-        private static readonly PrefixLogger Logger = PrefixLogger.Create(nameof(ReserveHotelActivity));
+        private static readonly ILogger Logger =
+            LoggerFactory.CreateLoggerFor<ReserveHotelActivity>();
 
         private static readonly Random Rnd = new Random(1);
 
@@ -22,7 +23,7 @@ namespace Items.RollbackEngine.Saga
         {
             Logger.Message("Reserving hotel");
 
-            Object car = workItem.Arguments["roomType"];
+            object car = workItem.Arguments["roomType"];
             int reservationId = Rnd.Next(100000);
 
             Logger.Message($"Reserved hotel {reservationId.ToString()}.");
@@ -32,7 +33,7 @@ namespace Items.RollbackEngine.Saga
 
         public override bool Compensate(WorkLog item, RoutingSlip routingSlip)
         {
-            Object reservationId = item.Result["reservationId"];
+            object reservationId = item.Result["reservationId"];
 
             Logger.Message($"Cancelled hotel {reservationId}.");
 
