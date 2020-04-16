@@ -1,6 +1,5 @@
 ﻿using System;
 using Acolyte.Assertions;
-using Items.Common.Logging;
 
 namespace Items.Common.Logging
 {
@@ -11,16 +10,11 @@ namespace Items.Common.Logging
         /// </summary>
         /// <typeparam name="T">Type for which instance is created.</typeparam>
         /// <returns>Created logger instance.</returns>
-        /// <exception cref="ArgumentException">
-        /// Cannot get full name of type <typeparamref name="T" />.
-        /// </exception>
         public static ILogger CreateLoggerFor<T>()
         {
             Type type = typeof(T);
-            string fullName = type.FullName ?? throw new ArgumentException(
-                $"Could not get full name of class {type}."
-            );
-            return PrefixLogger.Create(fullName);
+            string loggerName = type.Name;
+            return PrefixLogger.Create(loggerName);
         }
 
         /// <summary>
@@ -31,17 +25,12 @@ namespace Items.Common.Logging
         /// <exception cref="ArgumentNullException">
         /// <paramref name="type" /> is <c>null</c>.
         /// </exception>
-        /// <exception cref="ArgumentException">
-        /// Cannot get full name of passed type <paramref name="type" />.
-        /// </exception>
         public static ILogger CreateLoggerFor(Type type)
         {
             type.ThrowIfNull(nameof(type));
 
-            string fullName = type.FullName ?? throw new ArgumentException(
-                $"Could not get full name of class {nameof(type)}"
-            );
-            return PrefixLogger.Create(fullName);
+            string loggerName = type.Name;
+            return PrefixLogger.Create(loggerName);
         }
     }
 }
