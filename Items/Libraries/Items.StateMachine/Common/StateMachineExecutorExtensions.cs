@@ -5,7 +5,7 @@ using Items.StateMachine.States;
 
 namespace Items.StateMachine.Common
 {
-    public static class StateMachineExtensions
+    public static class StateMachineExecutorExtensions
     {
         public static IStateMachineExecutor<TState> PerformUntilFinalState<TState>(
             this IStatefulTask<TState> initialTask, TState initialState)
