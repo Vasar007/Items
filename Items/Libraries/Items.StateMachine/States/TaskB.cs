@@ -1,19 +1,21 @@
 ﻿namespace Items.StateMachine.States
 {
-    public sealed class DummyState : IStatefulTask<State>
+    public sealed class TaskB : IStatefulTask<State>
     {
         public bool IsFinal { get; } = true;
 
 
-        public DummyState()
+        public TaskB()
         {
         }
 
-        #region IStatefullTask<State> Implementation
+        #region IStatefulTask<State> Imlementation
 
         IStatefulTask<State> IStatefulTask<State>.DoAction(State state)
         {
-            return new DummyState();
+            (state.A, state.B) = (state.B, state.A);
+
+            return new FinalStatefulTask();
         }
 
         #endregion

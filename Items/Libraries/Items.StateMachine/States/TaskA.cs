@@ -1,11 +1,11 @@
 ﻿namespace Items.StateMachine.States
 {
-    public sealed class ActionA : IStatefulTask<State>
+    public sealed class TaskA : IStatefulTask<State>
     {
         public bool IsFinal { get; } = false;
 
 
-        public ActionA()
+        public TaskA()
         {
         }
 
@@ -19,7 +19,7 @@
                 state.B = 42;
             }
 
-            return new ActionC();
+            return new TaskC();
         }
 
         #endregion

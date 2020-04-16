@@ -1,6 +1,7 @@
 ﻿namespace Items.StateMachine.States
 {
     public interface IStatefulTask<TState>
+        where TState : class
     {
         bool IsFinal { get; }
 

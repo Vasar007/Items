@@ -16,12 +16,16 @@ namespace Items.RollbackEngine.Either
             return rollbackScope.TryRollbackSafe();
         }
 
-        public static IRollbackActionResult<TOut> Bind<TIn, TOut>(this IRollbackAction<TIn, TOut> action, TIn parameter)
+        public static IRollbackActionResult<TOut> Bind<TIn, TOut>(
+            this IRollbackAction<TIn, TOut> action, TIn parameter)
         {
-            return Bind(action, new SuccessfulResult<TIn>(parameter, Enumerable.Empty<IRollbackAction>()));
+            return Bind(
+                action, new SuccessfulResult<TIn>(parameter, Enumerable.Empty<IRollbackAction>())
+            );
         }
 
-        public static IRollbackActionResult<TOut> Bind<TIn, TOut>(this IRollbackAction<TIn, TOut> action, IRollbackActionResult<TIn> parameter)
+        public static IRollbackActionResult<TOut> Bind<TIn, TOut>(
+            this IRollbackAction<TIn, TOut> action, IRollbackActionResult<TIn> parameter)
         {
             action.ThrowIfNull(nameof(action));
             parameter.ThrowIfNull(nameof(parameter));
@@ -30,8 +34,7 @@ namespace Items.RollbackEngine.Either
             {
                 case FailedResult failedResult:
                 {
-                    failedResult.Exception.Rethrow();
-                    throw new Exception(); // Unreachable code.
+                    throw failedResult.Exception.Rethrow();
                 }
 
                 case SuccessfulResult<TIn> successfulResult:
@@ -40,7 +43,9 @@ namespace Items.RollbackEngine.Either
                     {
 
                         TOut result = action.Execute(successfulResult.Result);
-                        return new SuccessfulResult<TOut>(result, successfulResult.RollbackList.Prepend(action));
+                        return new SuccessfulResult<TOut>(
+                            result, successfulResult.RollbackList.Prepend(action)
+                        );
                     }
                     catch (Exception)
                     {
@@ -56,7 +61,8 @@ namespace Items.RollbackEngine.Either
             }
         }
 
-        public static IRollbackActionResult<TOut> Bind<TIn, TOut>(this IRollbackActionResult<TIn> parameter, IRollbackAction<TIn, TOut> action)
+        public static IRollbackActionResult<TOut> Bind<TIn, TOut>(
+            this IRollbackActionResult<TIn> parameter, IRollbackAction<TIn, TOut> action)
         {
             return Bind(action, parameter);
         }
