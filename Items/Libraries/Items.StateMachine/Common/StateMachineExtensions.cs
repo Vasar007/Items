@@ -1,4 +1,5 @@
 ﻿using System;
+using Acolyte.Assertions;
 using Items.StateMachine.Executors;
 using Items.StateMachine.States;
 
@@ -31,6 +32,8 @@ namespace Items.StateMachine.Common
             this IStateMachineExecutor<TState> statefulTasks)
             where TState : class
         {
+            statefulTasks.ThrowIfNull(nameof(statefulTasks));
+
             foreach (IStatefulTask<TState> _ in statefulTasks)
             {
                 // All actions perform in MoveNext.
