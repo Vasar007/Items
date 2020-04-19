@@ -1,7 +1,7 @@
 ﻿using Items.Common;
 using Items.Common.Logging;
-using Items.StateMachine.Common;
-using Items.StateMachine.States;
+using Items.StateMachine.V1.Common;
+using Items.StateMachine.V1.States;
 
 namespace Items.StateMachine
 {
@@ -35,12 +35,12 @@ namespace Items.StateMachine
             var initialState = new State(42, 1337);
             var initialAction = new TaskC();
 
-            State finalState = StateMachineHelper.PerformCasual(initialState, initialAction);
+            State finalState = StateMachineHelper.PerformStraightforward(initialState, initialAction);
 
             Logger.SkipLine();
             var initialAction2 = new TaskA();
 
-            State finalState2 = StateMachineHelper.PerformCasual(initialState, initialAction2);
+            State finalState2 = StateMachineHelper.PerformStraightforward(initialState, initialAction2);
         }
 
         public static void RunStateMachineUntilFinishEnumeratorSample()

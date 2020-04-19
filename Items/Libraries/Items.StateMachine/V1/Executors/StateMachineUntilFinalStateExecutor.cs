@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Acolyte.Assertions;
-using Items.StateMachine.States;
+using Items.StateMachine.V1.States;
 
-namespace Items.StateMachine.Executors
+namespace Items.StateMachine.V1.Executors
 {
     internal sealed class StateMachineUntilFinalStateExecutor<TState> :
         StateMachineBaseExecutor<TState>

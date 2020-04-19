@@ -1,9 +1,9 @@
 ﻿using System;
 using Acolyte.Assertions;
-using Items.StateMachine.Executors;
-using Items.StateMachine.States;
+using Items.StateMachine.V1.Executors;
+using Items.StateMachine.V1.States;
 
-namespace Items.StateMachine.Common
+namespace Items.StateMachine.V1.Common
 {
     public static class StateMachineExecutorExtensions
     {

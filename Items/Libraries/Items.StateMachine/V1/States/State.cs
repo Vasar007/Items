@@ -1,4 +1,4 @@
-﻿namespace Items.StateMachine.States
+﻿namespace Items.StateMachine.V1.States
 {
     public sealed class State
     {

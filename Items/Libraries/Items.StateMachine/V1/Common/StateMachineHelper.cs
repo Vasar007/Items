@@ -1,15 +1,15 @@
 ﻿using System;
 using Items.Common.Logging;
-using Items.StateMachine.States;
+using Items.StateMachine.V1.States;
 
-namespace Items.StateMachine.Common
+namespace Items.StateMachine.V1.Common
 {
     public static class StateMachineHelper
     {
         private static readonly ILogger Logger =
             LoggerFactory.CreateLoggerFor(typeof(StateMachineHelper));
 
-        public static TState PerformCasual<TState>(TState initialState,
+        public static TState PerformStraightforward<TState>(TState initialState,
             IStatefulTask<TState> initialTask)
             where TState : class
         {
