@@ -23,9 +23,7 @@ namespace Items.Common
         {
             foreach ((string sampleId, Action sample) in this)
             {
-                Logger.Message($"Run sample '{sampleId}'.");
-                sample();
-                Logger.Message($"Sample '{sampleId}' was finished.{Environment.NewLine}");
+                RunSafe(sampleId, sample);
             }
         }
 
@@ -33,14 +31,27 @@ namespace Items.Common
         {
             if (TryGetValue(sampleId, out Action sample))
             {
-                Logger.Message($"Run sample '{sampleId}'.");
-                sample();
-                Logger.Message($"Sample '{sampleId}' was finished.{Environment.NewLine}");
+                RunSafe(sampleId, sample);
             }
 
             throw new ArgumentException(
                 $"Failed to find sample '{sampleId}'.", nameof(sampleId)
             );
+        }
+
+        private void RunSafe(string sampleId, Action sample)
+        {
+            try
+            {
+                Logger.Message($"Run sample '{sampleId}'.");
+                sample();
+                Logger.Message($"Sample '{sampleId}' was finished successfully.{Environment.NewLine}");
+            }
+            catch (Exception ex)
+            {
+                Logger.Exception(ex, $"Failed to run sample '{sampleId}'. Skipping it.");
+                Logger.Message($"Sample '{sampleId}' was finished with failures.{Environment.NewLine}");
+            }
         }
     }
 }

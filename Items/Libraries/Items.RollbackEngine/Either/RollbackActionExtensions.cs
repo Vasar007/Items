@@ -8,7 +8,7 @@ namespace Items.RollbackEngine.Either
 {
     public static class RollbackActionExtensions
     {
-        public static Boolean TryRollbackSafe(this IEnumerable<IRollbackAction> rollbackActions)
+        public static bool TryRollbackSafe(this IEnumerable<IRollbackAction> rollbackActions)
         {
             rollbackActions.ThrowIfNull(nameof(rollbackActions));
 
