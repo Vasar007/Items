@@ -34,9 +34,12 @@ namespace Items.StateMachine.Common
         {
             statefulTasks.ThrowIfNull(nameof(statefulTasks));
 
-            foreach (IStatefulTask<TState> _ in statefulTasks)
+            using (var enumerator = statefulTasks.GetEnumerator())
             {
-                // All actions perform in MoveNext.
+                while (enumerator.MoveNext())
+                {
+                    // All actions perform in MoveNext.
+                }
             }
 
             return statefulTasks.State;

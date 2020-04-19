@@ -22,7 +22,7 @@ namespace Items.StateMachine.States
             }
 
             throw new Exception("Something goes wrong.");
-            return new TaskC();
+            //return new TaskC();
         }
 
         #endregion
