@@ -15,7 +15,7 @@
         {
             (state.A, state.B) = (state.B, state.A);
 
-            return new FinalStatefulTask();
+            return new FinalStatefulTask<State>();
         }
 
         #endregion

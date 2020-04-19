@@ -1,6 +1,7 @@
 ﻿namespace Items.StateMachine.V1.States
 {
-    public sealed class FinalStatefulTask : IStatefulTask<State>
+    public sealed class FinalStatefulTask<TState> : IStatefulTask<TState>
+        where TState : class
     {
         public bool IsFinal { get; } = true;
 
@@ -9,11 +10,11 @@
         {
         }
 
-        #region IStatefullTask<State> Implementation
+        #region IStatefullTask<TState> Implementation
 
-        IStatefulTask<State> IStatefulTask<State>.DoAction(State state)
+        IStatefulTask<TState> IStatefulTask<TState>.DoAction(TState state)
         {
-            return new FinalStatefulTask();
+            return new FinalStatefulTask<TState>();
         }
 
         #endregion

@@ -52,7 +52,7 @@ namespace Items.StateMachine.V1.Executors
 
         #endregion
 
-        #region IEnumerator
+        #region IEnumerator Implementation
 
         IEnumerator IEnumerable.GetEnumerator()
         {
