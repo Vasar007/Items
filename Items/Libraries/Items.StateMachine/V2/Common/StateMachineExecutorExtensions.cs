@@ -45,12 +45,12 @@ namespace Items.StateMachine.V2.Common
         }
 
         public static TState Execute<TState, TStateId>(
-            this IStateMachineExecutor<TState, TStateId> statefulTasks)
+            this IStateMachineExecutor<TState, TStateId> executor)
             where TState : class
         {
-            statefulTasks.ThrowIfNull(nameof(statefulTasks));
+            executor.ThrowIfNull(nameof(executor));
 
-            using (var enumerator = statefulTasks.GetEnumerator())
+            using (var enumerator = executor.GetEnumerator())
             {
                 while (enumerator.MoveNext())
                 {
@@ -58,7 +58,7 @@ namespace Items.StateMachine.V2.Common
                 }
             }
 
-            return statefulTasks.State;
+            return executor.State;
         }
     }
 }
