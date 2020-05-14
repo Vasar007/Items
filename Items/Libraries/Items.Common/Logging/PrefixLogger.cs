@@ -9,14 +9,16 @@ namespace Items.Common.Logging
         private readonly string _prefix;
 
 
-        private PrefixLogger(string prefix)
+        private PrefixLogger(
+            string prefix)
         {
             _prefix = prefix.ThrowIfNullOrEmpty(nameof(prefix));
         }
 
-        public static PrefixLogger Create(string prefix)
+        public static PrefixLogger Create(
+            string prefix)
         {
-            return new PrefixLogger(prefix);
+            return new PrefixLogger(WrapPrefix(prefix));
         }
 
         #region ILogger Implementation
@@ -75,5 +77,10 @@ namespace Items.Common.Logging
         }
 
         #endregion
+
+        private static string WrapPrefix(string prefix)
+        {
+            return $"[{prefix}]";
+        }
     }
 }
