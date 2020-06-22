@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Acolyte.Assertions;
 using Items.StateMachine.V2.States;
 
@@ -40,6 +41,11 @@ namespace Items.StateMachine.V2.Executors
 
         public override bool MoveNext()
         {
+            if (_current is null)
+            {
+                throw new InvalidOperationException("Invalid stateful task to process.");
+            }
+
             bool isFinal = _current.IsFinal;
 
             // Perform the task after getting IsFinal flag because it can be changed.
