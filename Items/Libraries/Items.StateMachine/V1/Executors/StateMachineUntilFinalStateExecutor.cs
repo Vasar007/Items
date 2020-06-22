@@ -39,7 +39,7 @@ namespace Items.StateMachine.V1.Executors
 
             bool isFinal = _current.IsFinal;
 
-            // Perform the task before getting IsFinal flag because it can be changed.
+            // Perform the task after getting 'IsFinal' flag because we can face final task and do not call it 'DoAction' method.
             _current = _current.DoAction(State);
             return !isFinal;
         }

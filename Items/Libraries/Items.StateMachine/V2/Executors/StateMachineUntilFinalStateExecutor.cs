@@ -48,7 +48,7 @@ namespace Items.StateMachine.V2.Executors
 
             bool isFinal = _current.IsFinal;
 
-            // Perform the task after getting IsFinal flag because it can be changed.
+            // Perform the task after getting 'IsFinal' flag because we can face final task and do not call it 'DoAction' method.
             TStateId stateId = _current.DoAction(State);
             _current = this[stateId];
             return !isFinal;
