@@ -4,9 +4,10 @@ using Items.StateMachine.V3.Tasks;
 
 namespace Items.StateMachine.V3.Executors
 {
-    public class SimpleExecutor
+    public static class SimpleExecutor
     {
-        public static StateBase Run(StateBase initialState, IReadOnlyCollection<ITaskBase<StateBase,StateBase>> workflow )
+        public static StateBase Run(StateBase initialState,
+            IReadOnlyCollection<ITaskBase<StateBase,StateBase>> workflow )
         {
             StateBase currentState = initialState;
             foreach (ITaskBase<StateBase,StateBase> task in workflow)

@@ -8,9 +8,6 @@ namespace Items.StateMachine
 {
     public sealed class StateMachineSamples : ISamplesModule
     {
-        private static readonly ILogger Logger =
-            LoggerFactory.CreateLoggerFor<StateMachineSamples>();
-
         public string ModuleName { get; } = nameof(StateMachineSamples);
 
 
