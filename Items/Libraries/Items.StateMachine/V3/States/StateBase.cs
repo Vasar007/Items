@@ -1,7 +1,9 @@
 ﻿namespace Items.StateMachine.V3.States
 {
-    public class StateBase
+    public abstract class StateBase
     {
-        
+        protected StateBase()
+        {
+        }
     }
 }
