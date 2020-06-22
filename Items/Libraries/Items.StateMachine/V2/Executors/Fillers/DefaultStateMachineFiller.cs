@@ -1,4 +1,5 @@
-﻿using Items.StateMachine.V2.States;
+﻿using System;
+using Items.StateMachine.V2.States;
 
 namespace Items.StateMachine.V2.Executors.Fillers
 {
@@ -22,6 +23,13 @@ namespace Items.StateMachine.V2.Executors.Fillers
         public IStateMachineExecutor<TState, TStateId> FillExecutor(
             IStatefulTask<TState, TStateId> statefulTask)
         {
+            if (statefulTask is null)
+            {
+                throw new ArgumentException(
+                    "Invalid stateful task to fill executor.", nameof(statefulTask)
+                );
+            }
+
             Executor[StateIdToFill] = statefulTask;
             return Executor;
         }
