@@ -1,17 +1,14 @@
 ﻿namespace Items.StateMachine.V1.States
 {
-    public sealed class TaskC : IStatefulTask<State>
+    public sealed class TaskC : NonFinalStatefulTaskBase<State>
     {
-        public bool IsFinal { get; } = false;
-
-
         public TaskC()
         {
         }
 
-        #region IStatefullTask<State> Implementation
+        #region NonFinalStatefulTaskBase<State> Overridden Methods
 
-        IStatefulTask<State> IStatefulTask<State>.DoAction(State state)
+        protected override IStatefulTask<State> DoActionInternal(State state)
         {
             if (state.B > 10)
             {

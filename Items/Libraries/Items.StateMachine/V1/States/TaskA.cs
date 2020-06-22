@@ -2,18 +2,15 @@
 
 namespace Items.StateMachine.V1.States
 {
-    public sealed class TaskA : IStatefulTask<State>
+    public sealed class TaskA : NonFinalStatefulTaskBase<State>
     {
-        public bool IsFinal { get; } = false;
-
-
         public TaskA()
         {
         }
 
-        #region IStatefullTask<State> Implementation
+        #region NonFinalStatefulTaskBase<State> Overridden Methods
 
-        IStatefulTask<State> IStatefulTask<State>.DoAction(State state)
+        protected override IStatefulTask<State> DoActionInternal(State state)
         {
             if (state.A > 10)
             {
@@ -22,7 +19,6 @@ namespace Items.StateMachine.V1.States
             }
 
             throw new Exception("Something goes wrong.");
-            //return new TaskC();
         }
 
         #endregion

@@ -5,7 +5,7 @@
     {
         private readonly TStateId _finalStateId;
 
-        public bool IsFinal { get; } = true;
+        bool IStatefulTask<TState, TStateId>.IsFinal { get; } = true;
 
 
         public FinalStatefulTask(
@@ -14,14 +14,10 @@
             _finalStateId = finalStateId;
         }
 
-        #region IStatefullTask<State, TStateId> Implementation
-
         TStateId IStatefulTask<TState, TStateId>.DoAction(TState state)
         {
             return _finalStateId;
         }
-
-        #endregion
     }
 
     public static class FinalStatefulTask<TState>

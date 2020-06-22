@@ -12,7 +12,7 @@ namespace Items.RollbackEngine.TaskEngine
 
         public State DoAction(State state)
         {
-            throw new NotImplementedException();
+            throw new Exception("Something goes wrong.");
         }
 
         public State RollbackSafe(State state)
