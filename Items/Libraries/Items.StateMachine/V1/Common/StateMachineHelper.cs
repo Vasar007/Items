@@ -35,7 +35,7 @@ namespace Items.StateMachine.V1.Common
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex, "Exception occured during perform.");
+                Logger.Exception(ex, "Exception occured during state machine performing.");
             }
 
             Logger.Message($"Final state: {currentState}");
