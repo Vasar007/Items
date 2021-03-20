@@ -11,5 +11,4 @@ You can find here some tasks for programming interview questions. If you have th
 
 This project is licensed under the terms of the [Apache License 2.0](LICENSE).
 
-
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FVasar007%2FItems.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FVasar007%2FItems?ref=badge_large)
