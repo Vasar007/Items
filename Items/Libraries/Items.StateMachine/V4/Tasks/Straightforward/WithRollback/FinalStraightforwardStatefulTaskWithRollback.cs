@@ -26,7 +26,7 @@ namespace Items.StateMachine.V4.Tasks.Straightforward.WithRollback
 
         bool IRollbackAction<TContext>.TryRollbackSafe(TContext context)
         {
-            return StatefulTaskWithRollbackWrapper.TryRollbackSafe(context);
+            return StatefulTaskWithRollbackWrapper.DefaultTryRollbackSafe(context);
         }
     }
 }

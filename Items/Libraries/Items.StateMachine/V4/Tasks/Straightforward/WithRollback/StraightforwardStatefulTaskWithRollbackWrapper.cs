@@ -15,7 +15,7 @@ namespace Items.StateMachine.V4.Tasks.Straightforward.WithRollback
         {
             _doAction = doAction.ThrowIfNull(nameof(doAction));
             _rollbackAction = rollbackAction ??
-                (context => StatefulTaskWithRollbackWrapper.TryRollbackSafe(context));
+                (context => StatefulTaskWithRollbackWrapper.DefaultTryRollbackSafe(context));
         }
 
         #region NonFinalStraightforwardStatefulTaskBase<TState> Overridden Methods

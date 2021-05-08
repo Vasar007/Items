@@ -15,7 +15,7 @@ namespace Items.StateMachine.V4.Tasks.Default.WithRollback
         {
             _doAction = doAction.ThrowIfNull(nameof(doAction));
             _rollbackAction = rollbackAction ??
-                (context => StatefulTaskWithRollbackWrapper.TryRollbackSafe(context));
+                (context => StatefulTaskWithRollbackWrapper.DefaultTryRollbackSafe(context));
         }
 
         #region NonFinalStatefulTaskBase<TContext, TStateId> Overridden Methods
@@ -47,7 +47,7 @@ namespace Items.StateMachine.V4.Tasks.Default.WithRollback
             );
         }
 
-        internal static bool TryRollbackSafe<TContext>(TContext _)
+        internal static bool DefaultTryRollbackSafe<TContext>(TContext _)
         {
             Logger.Message("Rollback. Nothing to rollback.");
             return true;
