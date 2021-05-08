@@ -10,7 +10,7 @@ namespace Items.RollbackEngine.Saga
         {
         }
 
-        public override Boolean AcceptMessage(Uri? uri, RoutingSlip routingSlip)
+        public override bool AcceptMessage(Uri? uri, RoutingSlip routingSlip)
         {
             var activity = new T();
             if (activity.CompensationQueueAddress.Equals(uri))

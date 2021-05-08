@@ -23,7 +23,7 @@ namespace Items.RollbackEngine.Saga
         {
             Logger.Message("Reserving car");
 
-            Object car = workItem.Arguments["vehicleType"];
+            object car = workItem.Arguments["vehicleType"];
             int reservationId = Rnd.Next(100000);
 
             Logger.Message($"Reserved car {reservationId.ToString()}.");
@@ -33,7 +33,7 @@ namespace Items.RollbackEngine.Saga
 
         public override bool Compensate(WorkLog item, RoutingSlip routingSlip)
         {
-            Object reservationId = item.Result["reservationId"];
+            object reservationId = item.Result["reservationId"];
 
             Logger.Message($"Cancelled car {reservationId}.");
 

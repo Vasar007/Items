@@ -2,6 +2,7 @@
 using Items.Common;
 using Items.RollbackEngine.Either;
 using Items.RollbackEngine.Saga;
+using Items.RollbackEngine.Simple;
 
 namespace Items.RollbackEngine
 {
@@ -20,10 +21,30 @@ namespace Items.RollbackEngine
         {
             return new SampleCollection
             {
+                { "RollbackEngine.Simple", RunSimpleSample },
                 { "RollbackEngine.TaskEngine", RunTaskEngineSample },
                 { "RollbackEngine.Either", RunEitherMonadSample },
                 { "RollbackEngine.Saga", RunSagaEngineSample }
             };
+        }
+
+        #endregion
+
+        #region Simple
+
+        public static void RunSimpleSample()
+        {
+            var actionOne = new SimpleRollbackActionOne();
+            var actionTwo = new SimpleRollbackActionTwo();
+
+            using var scope = new RollbackScope<int>(
+                continueRollbackOnFailed: true, rollbackParameter: 42
+            );
+
+            scope.Add(actionOne);
+            scope.Add(actionTwo);
+
+            scope.TryRollbackSafe();
         }
 
         #endregion
@@ -54,7 +75,7 @@ namespace Items.RollbackEngine
 
         #region Saga
 
-        private static ActivityHost[] s_processes = Array.Empty<ActivityHost>();
+        private static ActivityHost[] _processes = Array.Empty<ActivityHost>();
 
         public static void RunSagaEngineSample()
         {
@@ -67,7 +88,7 @@ namespace Items.RollbackEngine
 
 
             // Imagine these being completely separate processes with queues between them.
-            s_processes = new ActivityHost[]
+            _processes = new ActivityHost[]
             {
                 new ActivityHost<ReserveCarActivity>(Send),
                 new ActivityHost<ReserveHotelActivity>(Send),
@@ -81,7 +102,7 @@ namespace Items.RollbackEngine
         private static void Send(Uri? uri, RoutingSlip routingSlip)
         {
             // This is effectively the network dispatch.
-            foreach (ActivityHost process in s_processes)
+            foreach (ActivityHost process in _processes)
             {
                 if (process.AcceptMessage(uri, routingSlip))
                 {

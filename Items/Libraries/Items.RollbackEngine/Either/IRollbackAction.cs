@@ -1,11 +1,10 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace Items.RollbackEngine.Either
 {
     public interface IRollbackAction
     {
-        Boolean TryRollbackSafe();
+        bool TryRollbackSafe();
     }
 
     public interface IRollbackAction<TIn, TOut> : IRollbackAction

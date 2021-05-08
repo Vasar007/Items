@@ -53,7 +53,7 @@ namespace Items.RollbackEngine.TaskEngine
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex, "Exception occured during perform.");
+                Logger.Exception(ex, "Exception occurred during perform.");
                 Logger.Message($"Perform rollback for {doneActions.Count.ToString()} actions.");
 
                 foreach (IStatefulTask<State> action in doneActions)
