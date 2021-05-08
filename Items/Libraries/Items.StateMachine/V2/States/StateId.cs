@@ -10,6 +10,6 @@
 
         StateC = 3,
 
-        FinalState = 4
+        Final = 4
     }
 }

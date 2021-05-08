@@ -6,13 +6,13 @@
         {
         }
 
-        #region IStatefulTask<State, StateId> Overridden Methods
+        #region NonFinalStatefulTaskBase<State, StateId> Overridden Methods
 
         protected override StateId DoActionInternal(State state)
         {
             (state.A, state.B) = (state.B, state.A);
 
-            return StateId.FinalState;
+            return StateId.Final;
         }
 
         #endregion

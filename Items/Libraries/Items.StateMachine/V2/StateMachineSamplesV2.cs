@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Items.Common.Logging;
+using Items.StateMachine.V2.Common;
 using Items.StateMachine.V2.Executors;
 using Items.StateMachine.V2.States;
-using Items.StateMachine.V2.Common;
 
 namespace Items.StateMachine.V2
 {
@@ -21,19 +21,25 @@ namespace Items.StateMachine.V2
                 { StateId.StateA, new TaskA() },
                 { StateId.StateB, new TaskB() },
                 { StateId.StateC, new TaskC() },
-                { StateId.FinalState, FinalStatefulTask<State>.Create(StateId.FinalState) }
+                { StateId.Final, FinalStatefulTask<State>.Create(StateId.Final) }
             };
 
+            Logger.Message($"Initial state: {initialState}");
+            Logger.Message("Starting performing.");
             State finalState = StateMachineHelper.PerformStraightforward(
                 initialState, initialAction, transitions
             );
+            Logger.Message($"Final state: '{finalState}'.");
 
             Logger.SkipLine();
             var initialAction2 = new TaskA();
 
+            Logger.Message($"Initial state: {initialState}");
+            Logger.Message("Starting performing.");
             State finalState2 = StateMachineHelper.PerformStraightforward(
                 initialState, initialAction2, transitions
             );
+            Logger.Message($"Final state: '{finalState2}'.");
         }
 
         public static void RunStateMachineUntilFinishEnumeratorSample()
@@ -71,7 +77,7 @@ namespace Items.StateMachine.V2
                 .On(StateId.StateA).GoTo(new TaskA())
                 .On(StateId.StateB).GoTo(new TaskB())
                 .On(StateId.StateC).GoTo(new TaskC())
-                .On(StateId.FinalState).GoTo(FinalStatefulTask<State>.Create(StateId.FinalState));
+                .On(StateId.Final).GoTo(FinalStatefulTask<State>.Create(StateId.Final));
         }
     }
 }

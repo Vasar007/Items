@@ -14,16 +14,22 @@ namespace Items.StateMachine.V1
             var initialState = new State(42, 1337);
             var initialAction = new TaskC();
 
+            Logger.Message($"Initial state: {initialState}");
+            Logger.Message("Starting performing.");
             State finalState = StateMachineHelper.PerformStraightforward(
                 initialState, initialAction
             );
+            Logger.Message($"Final state: {finalState}");
 
             Logger.SkipLine();
             var initialAction2 = new TaskA();
 
+            Logger.Message($"Initial state: {initialState}");
+            Logger.Message("Starting performing.");
             State finalState2 = StateMachineHelper.PerformStraightforward(
                 initialState, initialAction2
             );
+            Logger.Message($"Final state: {finalState2}");
         }
 
         public static void RunStateMachineUntilFinishEnumeratorSample()
