@@ -260,6 +260,21 @@ namespace Items.StateMachine.V4
             return provider.CatchExceptions(continueExecutionOnFailed, handler: null);
         }
 
+        public static IStateMachineProvider<TContext, TStateId, TStatefulTask> CatchExceptions<TContext, TStateId, TStatefulTask>(
+          this IStateMachineProvider<TContext, TStateId, TStatefulTask> provider,
+          Action<Exception>? handler)
+          where TStatefulTask : class, IStatefulTask<TContext, TStateId>
+        {
+            return provider.CatchExceptions(continueExecutionOnFailed: false, handler);
+        }
+
+        public static IStateMachineProvider<TContext, TStateId, TStatefulTask> CatchExceptions<TContext, TStateId, TStatefulTask>(
+            this IStateMachineProvider<TContext, TStateId, TStatefulTask> provider)
+            where TStatefulTask : class, IStatefulTask<TContext, TStateId>
+        {
+            return provider.CatchExceptions(continueExecutionOnFailed: false, handler: null);
+        }
+
         public static IStateMachineProvider<TContext, TStateId, IStatefulTaskWithRollback<TContext, TStateId>> WithRollbackOnException<TContext, TStateId, TStatefulTaskWithRollback>(
             this IStateMachineProvider<TContext, TStateId, TStatefulTaskWithRollback> provider,
             bool continueRollbackOnFailed)
@@ -268,6 +283,13 @@ namespace Items.StateMachine.V4
             return new StateMachineWithRollbackProvider<TContext, TStateId, TStatefulTaskWithRollback>(
                 provider, continueRollbackOnFailed
             );
+        }
+
+        public static IStateMachineProvider<TContext, TStateId, IStatefulTaskWithRollback<TContext, TStateId>> WithRollbackOnException<TContext, TStateId, TStatefulTaskWithRollback>(
+        this IStateMachineProvider<TContext, TStateId, TStatefulTaskWithRollback> provider)
+        where TStatefulTaskWithRollback : class, IStatefulTaskWithRollback<TContext, TStateId>
+        {
+            return provider.WithRollbackOnException(continueRollbackOnFailed: true);
         }
 
         public static TContext Execute<TContext, TStateId, TStatefulTask>(

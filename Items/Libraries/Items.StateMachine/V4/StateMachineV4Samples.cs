@@ -66,7 +66,7 @@ namespace Items.StateMachine.V4
             Context finalState2 = initialAction2
                 .FillWithTransitionsTable(FillExecutor)
                 .PerformUntilFinalState(initialState)
-                .CatchExceptions(continueExecutionOnFailed: false)
+                .CatchExceptions()
                 .Execute();
 
             Logger.Message($"Final state: {finalState2}");
@@ -94,8 +94,8 @@ namespace Items.StateMachine.V4
             Context finalState2 = initialAction2
                 .FillWithTransitionsTable(FillExecutorWithRollback)
                 .PerformUntilFinalState(initialState)
-                .WithRollbackOnException(continueRollbackOnFailed: true)
-                .CatchExceptions(continueExecutionOnFailed: false)
+                .WithRollbackOnException()
+                .CatchExceptions()
                 .Execute();
 
             Logger.Message($"Final state: {finalState2}");
