@@ -13,11 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\.editorconfig" Link=".editorconfig" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Items.Common\Items.Common.csproj" />
+    <ProjectReference Include="$(SolutionDir)Libraries\Items.Common\Items.Common.csproj" />
   </ItemGroup>
 
 </Project>

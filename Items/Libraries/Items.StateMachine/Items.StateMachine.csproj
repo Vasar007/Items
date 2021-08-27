@@ -13,8 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Items.Common\Items.Common.csproj" />
-    <ProjectReference Include="..\Items.RollbackEngine\Items.RollbackEngine.csproj" />
+    <ProjectReference Include="$(SolutionDir)Libraries\Items.Common\Items.Common.csproj" />
+    <ProjectReference Include="$(SolutionDir)Libraries\Items.RollbackEngine\Items.RollbackEngine.csproj" />
   </ItemGroup>
 
 </Project>

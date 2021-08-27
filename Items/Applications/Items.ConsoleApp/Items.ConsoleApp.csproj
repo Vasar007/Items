@@ -14,9 +14,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Libraries\Items.Common\Items.Common.csproj" />
-    <ProjectReference Include="..\..\Libraries\Items.RollbackEngine\Items.RollbackEngine.csproj" />
-    <ProjectReference Include="..\..\Libraries\Items.StateMachine\Items.StateMachine.csproj" />
+    <ProjectReference Include="$(SolutionDir)Libraries\Items.Common\Items.Common.csproj" />
+    <ProjectReference Include="$(SolutionDir)Libraries\Items.RollbackEngine\Items.RollbackEngine.csproj" />
+    <ProjectReference Include="$(SolutionDir)Libraries\Items.StateMachine\Items.StateMachine.csproj" />
   </ItemGroup>
 
 </Project>
