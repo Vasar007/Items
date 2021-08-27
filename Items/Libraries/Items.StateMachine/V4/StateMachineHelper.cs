@@ -11,7 +11,7 @@ namespace Items.StateMachine.V4
         private static readonly ILogger Logger =
              LoggerFactory.CreateLoggerFor(typeof(StateMachineHelper));
 
-        public static TContext PerformStraightforward<TContext, TStateId>(
+        public static TContext PerformSimple<TContext, TStateId>(
             TContext context,
             IStatefulTask<TContext, TStateId> initialTask,
             IReadOnlyDictionary<TStateId, IStatefulTask<TContext, TStateId>> transitions)
@@ -78,6 +78,13 @@ namespace Items.StateMachine.V4
 
             Logger.Debug($"Final state: {context}");
             return context;
+        }
+
+        public static TContext PerformStraightforward<TContext>(
+            TContext context,
+            params IStraightforwardStatefulTask<TContext>[] tasks)
+        {
+            return PerformStraightforward(context, (IReadOnlyList<IStraightforwardStatefulTask<TContext>>) tasks);
         }
     }
 }
