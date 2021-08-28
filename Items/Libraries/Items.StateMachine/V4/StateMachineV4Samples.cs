@@ -28,7 +28,7 @@ namespace Items.StateMachine.V4
 
             Logger.Message($"Initial state: {initialState}");
             Logger.Message("Starting performing.");
-            Context finalState = StateMachineHelper.PerformSimple(
+            Context finalState = StateMachineHelper.Perform(
                 initialState, initialAction, transitions
             );
             Logger.Message($"Final state: '{finalState}'.");
@@ -38,7 +38,7 @@ namespace Items.StateMachine.V4
 
             Logger.Message($"Initial state: {initialState}");
             Logger.Message("Starting performing.");
-            Context finalState2 = StateMachineHelper.PerformSimple(
+            Context finalState2 = StateMachineHelper.Perform(
                 initialState, initialAction2, transitions
             );
             Logger.Message($"Final state: '{finalState2}'.");
