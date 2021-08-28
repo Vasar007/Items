@@ -18,7 +18,7 @@
             return _stateIdToMove;
         }
 
-        protected override bool TryRollbackInternalSafe(TContext context)
+        protected override bool TryRollbackInternal(TContext context)
         {
             // Nothing to rollback.
             return true;

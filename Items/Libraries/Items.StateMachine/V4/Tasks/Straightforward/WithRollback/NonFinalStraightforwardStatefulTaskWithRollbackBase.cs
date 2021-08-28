@@ -20,11 +20,11 @@ namespace Items.StateMachine.V4.Tasks.Straightforward.WithRollback
 
         protected abstract void DoActionInternal(TContext context);
 
-        bool IRollbackAction<TContext>.TryRollbackSafe(TContext context)
+        bool IRollbackAction<TContext>.TryRollback(TContext context)
         {
-            return TryRollbackInternalSafe(context);
+            return TryRollbackInternal(context);
         }
 
-        protected abstract bool TryRollbackInternalSafe(TContext context);
+        protected abstract bool TryRollbackInternal(TContext context);
     }
 }

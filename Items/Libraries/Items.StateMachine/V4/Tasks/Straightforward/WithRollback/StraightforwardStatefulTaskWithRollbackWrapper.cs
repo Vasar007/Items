@@ -25,7 +25,7 @@ namespace Items.StateMachine.V4.Tasks.Straightforward.WithRollback
             _doAction(context);
         }
 
-        protected override bool TryRollbackInternalSafe(TContext context)
+        protected override bool TryRollbackInternal(TContext context)
         {
             return _rollbackAction(context);
         }

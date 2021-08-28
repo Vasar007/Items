@@ -22,7 +22,7 @@ namespace Items.StateMachine.V4.Tasks.Default.WithRollback
             return _finalStateId;
         }
 
-        bool IRollbackAction<TContext>.TryRollbackSafe(TContext context)
+        bool IRollbackAction<TContext>.TryRollback(TContext context)
         {
             return StatefulTaskWithRollbackWrapper.DefaultTryRollbackSafe(context);
         }

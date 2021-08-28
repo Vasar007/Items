@@ -21,7 +21,7 @@ namespace Items.StateMachine.V4.Samples
             return StateId.StateB;
         }
 
-        protected override bool TryRollbackInternalSafe(Context context)
+        protected override bool TryRollbackInternal(Context context)
         {
             context.B /= 10;
 

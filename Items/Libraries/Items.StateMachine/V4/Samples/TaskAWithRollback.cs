@@ -22,7 +22,7 @@ namespace Items.StateMachine.V4.Samples
             throw new Exception("Something goes wrong.");
         }
 
-        protected override bool TryRollbackInternalSafe(Context context)
+        protected override bool TryRollbackInternal(Context context)
         {
             context.A /= 10;
 

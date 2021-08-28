@@ -173,7 +173,7 @@ namespace Items.RollbackEngine.Simple
                     "Trying to rollback action. If exception will occur, this will be considered " +
                     "as a failed rollback."
                 );
-                return rollbackAction.TryRollbackSafe(_rollbackParameter);
+                return rollbackAction.TryRollback(_rollbackParameter);
             }
             catch (Exception ex)
             {

@@ -18,11 +18,11 @@ namespace Items.StateMachine.V4.Tasks.Default.WithRollback
 
         protected abstract TStateId DoActionInternal(TContext context);
 
-        bool IRollbackAction<TContext>.TryRollbackSafe(TContext context)
+        bool IRollbackAction<TContext>.TryRollback(TContext context)
         {
-            return TryRollbackInternalSafe(context);
+            return TryRollbackInternal(context);
         }
 
-        protected abstract bool TryRollbackInternalSafe(TContext context);
+        protected abstract bool TryRollbackInternal(TContext context);
     }
 }

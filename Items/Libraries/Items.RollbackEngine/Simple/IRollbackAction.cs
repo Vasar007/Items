@@ -2,6 +2,6 @@
 {
     public interface IRollbackAction
     {
-        bool TryRollbackSafe();
+        bool TryRollback();
     }
 }

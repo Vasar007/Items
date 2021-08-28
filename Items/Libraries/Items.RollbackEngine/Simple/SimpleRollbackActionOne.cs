@@ -14,7 +14,7 @@ namespace Items.RollbackEngine.Simple
 
         #region IRollbackAction<int> Implementation
 
-        public bool TryRollbackSafe(int rollbackParameter)
+        public bool TryRollback(int rollbackParameter)
         {
             Logger.Message(
                 $"Rollback action two with parameter: '{rollbackParameter.ToString()}'."

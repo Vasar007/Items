@@ -2,6 +2,6 @@
 {
     public interface IRollbackAction<in T>
     {
-        bool TryRollbackSafe(T rollbackParameter);
+        bool TryRollback(T rollbackParameter);
     }
 }

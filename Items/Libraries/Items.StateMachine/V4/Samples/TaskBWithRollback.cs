@@ -17,7 +17,7 @@ namespace Items.StateMachine.V4.Samples
             return StateId.Final;
         }
 
-        protected override bool TryRollbackInternalSafe(Context context)
+        protected override bool TryRollbackInternal(Context context)
         {
             (context.B, context.A) = (context.A, context.B);
 
