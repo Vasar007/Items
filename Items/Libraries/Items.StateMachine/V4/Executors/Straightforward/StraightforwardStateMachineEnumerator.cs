@@ -8,7 +8,7 @@ namespace Items.StateMachine.V4.Executors.Straightforward
         StateMachineBaseEnumerator<TContext, int, TStraightforwardStatefulTask>
         where TStraightforwardStatefulTask : class, IStraightforwardStatefulTask<TContext>
     {
-        private readonly CustomStateMachineAction<int> _customAction;
+        private readonly CustomStraightforwardStateMachineAction<TContext, TStraightforwardStatefulTask> _customAction;
 
         private int _currentStateId;
 
@@ -24,7 +24,7 @@ namespace Items.StateMachine.V4.Executors.Straightforward
             TContext context,
             TStraightforwardStatefulTask initialTask,
             IReadOnlyList<TStraightforwardStatefulTask> transitionsList,
-            CustomStateMachineAction<int> customAction)
+            CustomStraightforwardStateMachineAction<TContext, TStraightforwardStatefulTask> customAction)
         {
             Context = context;
             _current = initialTask.ThrowIfNull(nameof(initialTask));
@@ -45,8 +45,8 @@ namespace Items.StateMachine.V4.Executors.Straightforward
 
             // Perform the task after getting "IsFinal" flag because we can face final task and do not call it "DoAction" method.
             // "DoAction" method can be wrapped into custom action.
-            // We ignore returning value because our state machine is straightforward.
-            int _ = _customAction(() => _current.DoAction(Context));
+            // There is no returning value because our state machine is straightforward.
+            _customAction(_current, Context);
 
             // Try to change state safely.
             // On final task there are no reason to change state ID because our state machine is straightforward.

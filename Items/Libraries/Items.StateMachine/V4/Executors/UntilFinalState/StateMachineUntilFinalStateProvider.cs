@@ -11,18 +11,18 @@ namespace Items.StateMachine.V4.Executors.UntilFinalState
         private readonly TContext _context;
         private readonly TStatefulTask _initialTask;
         private readonly IReadOnlyDictionary<TStateId, TStatefulTask> _transitionsTable;
-        private readonly CustomStateMachineAction<TStateId> _customAction;
+        private readonly CustomStateMachineAction<TContext, TStateId, TStatefulTask> _customAction;
 
         public StateMachineUntilFinalStateProvider(
             TContext context,
             TStatefulTask initialTask,
             IReadOnlyDictionary<TStateId, TStatefulTask> transitionsTable,
-            CustomStateMachineAction<TStateId>? customAction)
+            CustomStateMachineAction<TContext, TStateId, TStatefulTask>? customAction)
         {
             _context = context;
             _initialTask = initialTask.ThrowIfNull(nameof(initialTask));
             _transitionsTable = transitionsTable.ThrowIfNull(nameof(transitionsTable));
-            _customAction = customAction ?? (doAction => doAction());
+            _customAction = customAction ?? ((statefulTask, ctx) => statefulTask.DoAction(ctx));
         }
 
         #region IStateMachineProvider<TContext, TStateId, TStatefulTask> Implementation
@@ -46,7 +46,7 @@ namespace Items.StateMachine.V4.Executors.UntilFinalState
             TContext context,
             TStatefulTask initialTask,
             IReadOnlyDictionary<TStateId, TStatefulTask> transitionsTable,
-            CustomStateMachineAction<TStateId>? customAction)
+            CustomStateMachineAction<TContext, TStateId, TStatefulTask>? customAction)
             where TStatefulTask : class, IStatefulTask<TContext, TStateId>
         {
             return new StateMachineUntilFinalStateProvider<TContext, TStateId, TStatefulTask>(

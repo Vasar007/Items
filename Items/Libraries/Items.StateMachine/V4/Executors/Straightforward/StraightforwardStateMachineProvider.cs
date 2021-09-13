@@ -11,18 +11,18 @@ namespace Items.StateMachine.V4.Executors.Straightforward
         private readonly TContext _context;
         private readonly TStraightforwardStatefulTask _initialTask;
         private readonly IReadOnlyList<TStraightforwardStatefulTask> _transitionsList;
-        private readonly CustomStateMachineAction<int> _customAction;
+        private readonly CustomStraightforwardStateMachineAction<TContext, TStraightforwardStatefulTask> _customAction;
 
         public StraightforwardStateMachineProvider(
             TContext context,
             TStraightforwardStatefulTask initialTask,
             IReadOnlyList<TStraightforwardStatefulTask> transitionsList,
-            CustomStateMachineAction<int>? customAction)
+            CustomStraightforwardStateMachineAction<TContext, TStraightforwardStatefulTask>? customAction)
         {
             _context = context;
             _initialTask = initialTask.ThrowIfNull(nameof(initialTask));
             _transitionsList = transitionsList.ThrowIfNull(nameof(transitionsList));
-            _customAction = customAction ?? (doAction => doAction());
+            _customAction = customAction ?? ((statefulTask, ctx) => statefulTask.DoAction(ctx));
         }
 
         #region IStateMachineProvider<TContext, TStateId, TStatefulTask> Implementation
@@ -46,7 +46,7 @@ namespace Items.StateMachine.V4.Executors.Straightforward
             TContext context,
             TStraightforwardStatefulTask initialTask,
             IReadOnlyList<TStraightforwardStatefulTask> transitionsList,
-            CustomStateMachineAction<int>? customAction)
+            CustomStraightforwardStateMachineAction<TContext, TStraightforwardStatefulTask>? customAction)
             where TStraightforwardStatefulTask : class, IStraightforwardStatefulTask<TContext>
         {
             return new StraightforwardStateMachineProvider<TContext, TStraightforwardStatefulTask>(

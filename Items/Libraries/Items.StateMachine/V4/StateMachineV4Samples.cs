@@ -82,6 +82,7 @@ namespace Items.StateMachine.V4
             Context finalState = initialAction
                 .FillWithTransitionsTable(FillExecutorWithRollback)
                 .PerformUntilFinalState(initialState)
+                .WithRollbackOnException()
                 .Execute();
 
             Logger.Message($"Final state: {finalState}");

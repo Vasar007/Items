@@ -17,7 +17,11 @@ using Items.StateMachine.V4.Tasks.Straightforward.WithRollback;
 
 namespace Items.StateMachine.V4
 {
-    public delegate TStateId CustomStateMachineAction<TStateId>(Func<TStateId> stateId);
+    public delegate TStateId CustomStateMachineAction<TContext, TStateId, TStatefulTask>(TStatefulTask statefulTask, TContext context)
+        where TStatefulTask : class, IStatefulTask<TContext, TStateId>;
+
+    public delegate void CustomStraightforwardStateMachineAction<TContext, TStraightforwardStatefulTask>(TStraightforwardStatefulTask statefulTask, TContext context)
+            where TStraightforwardStatefulTask : class, IStraightforwardStatefulTask<TContext>;
 
     public delegate IStateMachineBuilderWithoutStateId<TContext, TStateId, TStatefulTask>
         FillWithTransitionsTableAction<TContext, TStateId, TStatefulTask>(TStatefulTask initialTask)
@@ -206,7 +210,7 @@ namespace Items.StateMachine.V4
         public static IStateMachineProvider<TContext, TStateId, TStatefulTask> PerformUntilFinalState<TContext, TStateId, TStatefulTask>(
             this IStateMachineBuilderWithoutStateId<TContext, TStateId, TStatefulTask> builder,
             TContext context,
-            CustomStateMachineAction<TStateId>? customAction)
+            CustomStateMachineAction<TContext, TStateId, TStatefulTask>? customAction)
             where TStatefulTask : class, IStatefulTask<TContext, TStateId>
         {
             return StateMachineUntilFinalStateProvider.Create(
@@ -225,7 +229,7 @@ namespace Items.StateMachine.V4
         public static IStateMachineProvider<TContext, int, TStraightforwardStatefulTask> PerformUntilFinalState<TContext, TStraightforwardStatefulTask>(
             this IStraightforwardStateMachineBuilder<TContext, TStraightforwardStatefulTask> builder,
             TContext context,
-            CustomStateMachineAction<int>? customAction)
+            CustomStraightforwardStateMachineAction<TContext, TStraightforwardStatefulTask>? customAction)
             where TStraightforwardStatefulTask : class, IStraightforwardStatefulTask<TContext>
         {
             return StraightforwardStateMachineProvider.Create(

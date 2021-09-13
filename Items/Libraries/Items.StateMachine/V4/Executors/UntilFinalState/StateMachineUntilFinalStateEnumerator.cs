@@ -8,7 +8,7 @@ namespace Items.StateMachine.V4.Executors.UntilFinalState
         StateMachineBaseEnumerator<TContext, TStateId, TStatefulTask>
         where TStatefulTask : class, IStatefulTask<TContext, TStateId>
     {
-        private readonly CustomStateMachineAction<TStateId> _customAction;
+        private readonly CustomStateMachineAction<TContext, TStateId, TStatefulTask> _customAction;
 
         public override TContext Context { get; }
 
@@ -22,7 +22,7 @@ namespace Items.StateMachine.V4.Executors.UntilFinalState
             TContext context,
             TStatefulTask initialTask,
             IReadOnlyDictionary<TStateId, TStatefulTask> transitionsTable,
-            CustomStateMachineAction<TStateId> customAction)
+            CustomStateMachineAction<TContext, TStateId, TStatefulTask> customAction)
         {
             Context = context;
             _current = initialTask.ThrowIfNull(nameof(initialTask));
@@ -40,7 +40,7 @@ namespace Items.StateMachine.V4.Executors.UntilFinalState
 
             // Perform the task after getting "IsFinal" flag because we can face final task and do not call it "DoAction" method.
             // "DoAction" method can be wrapped into custom action.
-            TStateId stateId = _customAction(() => _current.DoAction(Context));
+            TStateId stateId = _customAction(_current, Context);
             _current = this[stateId];
             return !isFinal;
         }
