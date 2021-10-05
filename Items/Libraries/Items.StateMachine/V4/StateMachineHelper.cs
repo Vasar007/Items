@@ -17,6 +17,7 @@ namespace Items.StateMachine.V4
 
         public static TContext Perform<TContext, TStateId>(
             TContext context,
+            bool catchExceptions,
             IStatefulTask<TContext, TStateId> initialTask,
             IReadOnlyDictionary<TStateId, IStatefulTask<TContext, TStateId>> transitions)
         {
@@ -27,11 +28,14 @@ namespace Items.StateMachine.V4
             {
                 Logger.Debug("Starting performing.");
 
-                ExecuteInternal(context, initialTask, transitions, null);
+                ExecuteInternal(context, initialTask, transitions, addRollback: null);
             }
             catch (Exception ex)
             {
                 Logger.Exception(ex, "Exception occurred during state machine performing.");
+
+                if (!catchExceptions)
+                    throw;
             }
 
             Logger.Debug($"Final state: {context}");
@@ -40,6 +44,7 @@ namespace Items.StateMachine.V4
 
         public static TContext PerformWithRollback<TContext, TStateId>(
             TContext context,
+            bool catchExceptions,
             IStatefulTaskWithRollback<TContext, TStateId> initialTask,
             IReadOnlyDictionary<TStateId, IStatefulTaskWithRollback<TContext, TStateId>> transitions)
         {
@@ -60,6 +65,9 @@ namespace Items.StateMachine.V4
             catch (Exception ex)
             {
                 Logger.Exception(ex, "Exception occurred during state machine performing.");
+
+                if (!catchExceptions)
+                    throw;
             }
 
             Logger.Debug($"Final state: {context}");
@@ -68,6 +76,7 @@ namespace Items.StateMachine.V4
 
         public static TContext PerformStraightforward<TContext>(
             TContext context,
+            bool catchExceptions,
             IReadOnlyList<IStraightforwardStatefulTask<TContext>> tasks)
         {
             // We can log type names of state and tasks but it will be helpful for debugging.
@@ -77,11 +86,14 @@ namespace Items.StateMachine.V4
             {
                 Logger.Debug("Starting straightforward performing.");
 
-                ExecuteStraightforwardInternal(context, tasks, null);
+                ExecuteStraightforwardInternal(context, tasks, addRollback: null);
             }
             catch (Exception ex)
             {
                 Logger.Exception(ex, "Exception occurred during state machine performing.");
+
+                if (!catchExceptions)
+                    throw;
             }
 
             Logger.Debug($"Final state: {context}");
@@ -90,13 +102,15 @@ namespace Items.StateMachine.V4
 
         public static TContext PerformStraightforward<TContext>(
             TContext context,
+            bool catchExceptions,
             params IStraightforwardStatefulTask<TContext>[] tasks)
         {
-            return PerformStraightforward(context, (IReadOnlyList<IStraightforwardStatefulTask<TContext>>) tasks);
+            return PerformStraightforward(context, catchExceptions, (IReadOnlyList<IStraightforwardStatefulTask<TContext>>) tasks);
         }
 
         public static TContext PerformStraightforwardWithRollback<TContext>(
             TContext context,
+            bool catchExceptions,
             IReadOnlyList<IStraightforwardStatefulTaskWithRollback<TContext>> tasks)
         {
             // We can log type names of state and tasks but it will be helpful for debugging.
@@ -114,6 +128,9 @@ namespace Items.StateMachine.V4
             catch (Exception ex)
             {
                 Logger.Exception(ex, "Exception occurred during state machine performing.");
+
+                if (!catchExceptions)
+                    throw;
             }
 
             Logger.Debug($"Final state: {context}");
@@ -122,9 +139,10 @@ namespace Items.StateMachine.V4
 
         public static TContext PerformStraightforwardWithRollback<TContext>(
             TContext context,
+            bool catchExceptions,
             params IStraightforwardStatefulTaskWithRollback<TContext>[] tasks)
         {
-            return PerformStraightforwardWithRollback(context, (IReadOnlyList<IStraightforwardStatefulTaskWithRollback<TContext>>) tasks);
+            return PerformStraightforwardWithRollback(context, catchExceptions, (IReadOnlyList<IStraightforwardStatefulTaskWithRollback<TContext>>) tasks);
         }
 
         private static void ExecuteInternal<TContext, TStateId>(
