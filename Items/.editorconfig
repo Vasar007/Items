@@ -1,8 +1,19 @@
 ﻿# Remove the line below if you want to inherit .editorconfig settings from higher directories
 root = true
 
-# C# files
-[*.cs]
+# C# and F# files
+[*.{cs,fs,fsi,fsx}]
+
+# Files to exclude from foramtting because dotnet-format cannot process F# usages in C# code.
+
+[Applications/ProjectV.ConsoleApp/Program.cs]
+generated_code = true
+
+[Applications/ProjectV.DesktopApp/Models/ContentDirectories/ContentDirectoryHelper.cs]
+generated_code = true
+
+[Applications/ProjectV.DesktopApp/Models/ContentDirectories/ContentFinderWrapper.cs]
+generated_code = true
 
 #### Core EditorConfig Options ####
 
@@ -10,10 +21,14 @@ root = true
 indent_size = 4
 indent_style = space
 tab_width = 4
+trim_trailing_whitespace = true
 
 # New line preferences
 #end_of_line = crlf -> Disabling because it can be system-dependent.
 insert_final_newline = true
+
+# Encoding
+charset = utf-8-bom
 
 #### .NET Coding Conventions ####
 
@@ -132,7 +147,7 @@ csharp_indent_block_contents = true
 csharp_indent_braces = false
 csharp_indent_case_contents = true
 csharp_indent_case_contents_when_block = false
-csharp_indent_labels = no_change
+csharp_indent_labels = one_less_than_current
 csharp_indent_switch_labels = true
 
 # Space preferences
@@ -213,7 +228,7 @@ dotnet_diagnostic.CS0219.severity = error
 #### IDE Warnings ####
 
 # IDE0005: Using directive is unnecessary.
-dotnet_diagnostic.IDE0005.severity = warning
+dotnet_diagnostic.IDE0005.severity = error
 
 # IDE0039: Use local function
 dotnet_diagnostic.IDE0039.severity = silent
