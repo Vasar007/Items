@@ -8,7 +8,6 @@ using Items.StateMachine.V4.Executors.Safe;
 using Items.StateMachine.V4.Executors.Straightforward;
 using Items.StateMachine.V4.Executors.UntilFinalState;
 using Items.StateMachine.V4.Executors.WithRollback;
-using Items.StateMachine.V4.Factories;
 using Items.StateMachine.V4.Tasks;
 using Items.StateMachine.V4.Tasks.Default;
 using Items.StateMachine.V4.Tasks.Default.WithRollback;
@@ -43,11 +42,26 @@ namespace Items.StateMachine.V4
             return initialTask.AsInitial<TContext, TStateId, IStatefulTask<TContext, TStateId>>(initialStateId);
         }
 
+        // To simplify call (no need in generic arguments).
+        public static IStateMachineBuilderWithoutStateId<TContext, TStateId, IStatefulTask<TContext, TStateId>> AsInitial<TContext, TStateId>(
+            this TStateId initialStateId,
+            IStatefulTask<TContext, TStateId> initialTask)
+        {
+            return initialTask.AsInitial(initialStateId);
+        }
+
         public static IStateMachineBuilderWithoutStateId<TContext, TStateId, IStatefulTask<TContext, TStateId>> AsInitial<TContext, TStateId>(
             this StatefulTaskDoAction<TContext, TStateId> doAction,
             TStateId initialStateId)
         {
             return StatefulTaskWrapper.Create(doAction).AsInitial<TContext, TStateId, IStatefulTask<TContext, TStateId>>(initialStateId);
+        }
+
+        public static IStateMachineBuilderWithoutStateId<TContext, TStateId, IStatefulTask<TContext, TStateId>> AsInitial<TContext, TStateId>(
+          this TStateId initialStateId,
+          StatefulTaskDoAction<TContext, TStateId> doAction)
+        {
+            return doAction.AsInitial(initialStateId);
         }
 
         // To simplify call (no need in generic arguments).
@@ -58,6 +72,14 @@ namespace Items.StateMachine.V4
             return initialTask.AsInitial<TContext, TStateId, IStatefulTaskWithRollback<TContext, TStateId>>(initialStateId);
         }
 
+        // To simplify call (no need in generic arguments).
+        public static IStateMachineBuilderWithoutStateId<TContext, TStateId, IStatefulTaskWithRollback<TContext, TStateId>> AsInitial<TContext, TStateId>(
+            this TStateId initialStateId,
+            IStatefulTaskWithRollback<TContext, TStateId> initialTask)
+        {
+            return initialTask.AsInitial(initialStateId);
+        }
+
         public static IStateMachineBuilderWithoutStateId<TContext, TStateId, IStatefulTaskWithRollback<TContext, TStateId>> AsInitial<TContext, TStateId>(
             this StatefulTaskDoAction<TContext, TStateId> doAction,
             StatefulTaskRollbackAction<TContext>? rollbackAction,
@@ -65,6 +87,14 @@ namespace Items.StateMachine.V4
         {
             return StatefulTaskWithRollbackWrapper.Create(doAction, rollbackAction)
                 .AsInitial<TContext, TStateId, IStatefulTaskWithRollback<TContext, TStateId>>(initialStateId);
+        }
+
+        public static IStateMachineBuilderWithoutStateId<TContext, TStateId, IStatefulTaskWithRollback<TContext, TStateId>> AsInitial<TContext, TStateId>(
+          this TStateId initialStateId,
+          StatefulTaskDoAction<TContext, TStateId> doAction,
+          StatefulTaskRollbackAction<TContext>? rollbackAction)
+        {
+            return doAction.AsInitial(rollbackAction, initialStateId);
         }
 
         // To simplify call (no need in generic arguments).

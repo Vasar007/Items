@@ -101,7 +101,7 @@ namespace Items.StateMachine.V4
         private static IStateMachineBuilderWithoutStateId<Context, StateId, IStatefulTask<Context, StateId>> FillExecutor(
             IStatefulTask<Context, StateId> initialTask)
         {
-            return initialTask.AsInitial(StateId.Initial)
+            return StateId.Initial.AsInitial(initialTask)
                 .On(StateId.StateA).GoTo(new TaskA())
                 .On(StateId.StateB).GoTo(new TaskB())
                 .On(StateId.StateC).GoTo(new TaskC())
@@ -111,7 +111,7 @@ namespace Items.StateMachine.V4
         private static IStateMachineBuilderWithoutStateId<Context, StateId, IStatefulTaskWithRollback<Context, StateId>> FillExecutorWithRollback(
             IStatefulTaskWithRollback<Context, StateId> initialTask)
         {
-            return initialTask.AsInitial(StateId.Initial)
+            return StateId.Initial.AsInitial(initialTask)
                 .On(StateId.StateA).GoTo(new TaskAWithRollback())
                 .On(StateId.StateB).GoTo(new TaskBWithRollback())
                 .On(StateId.StateC).GoTo(new TaskCWithRollback())
