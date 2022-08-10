@@ -51,8 +51,7 @@ namespace Items.StateMachine.V4
 
             Logger.Message($"Initial state: {initialState}");
             Logger.Message("Starting performing.");
-            Context finalState = initialAction
-                .FillWithTransitionsTable(FillExecutor)
+            Context finalState = FillExecutor(initialAction)
                 .PerformUntilFinalState(initialState)
                 .Execute();
 
@@ -63,8 +62,7 @@ namespace Items.StateMachine.V4
 
             Logger.Message($"Initial state: {initialState}");
             Logger.Message("Starting performing.");
-            Context finalState2 = initialAction2
-                .FillWithTransitionsTable(FillExecutor)
+            Context finalState2 = FillExecutor(initialAction2)
                 .PerformUntilFinalState(initialState)
                 .CatchExceptions()
                 .Execute();
@@ -79,8 +77,7 @@ namespace Items.StateMachine.V4
 
             Logger.Message($"Initial state: {initialState}");
             Logger.Message("Starting performing with rollback.");
-            Context finalState = initialAction
-                .FillWithTransitionsTable(FillExecutorWithRollback)
+            Context finalState = FillExecutorWithRollback(initialAction)
                 .PerformUntilFinalState(initialState)
                 .WithRollbackOnException()
                 .Execute();
@@ -92,8 +89,7 @@ namespace Items.StateMachine.V4
 
             Logger.Message($"Initial state: {initialState}");
             Logger.Message("Starting performing with rollback.");
-            Context finalState2 = initialAction2
-                .FillWithTransitionsTable(FillExecutorWithRollback)
+            Context finalState2 = FillExecutorWithRollback(initialAction2)
                 .PerformUntilFinalState(initialState)
                 .WithRollbackOnException()
                 .CatchExceptions()

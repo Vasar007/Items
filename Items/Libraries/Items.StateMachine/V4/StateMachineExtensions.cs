@@ -24,7 +24,7 @@ namespace Items.StateMachine.V4
             where TStraightforwardStatefulTask : class, IStraightforwardStatefulTask<TContext>;
 
     public delegate IStateMachineBuilderWithoutStateId<TContext, TStateId, TStatefulTask>
-        FillWithTransitionsTableAction<TContext, TStateId, TStatefulTask>(TStatefulTask initialTask)
+        FillWithTransitionsTableAction<TContext, TStateId, TStatefulTask>()
         where TStatefulTask : class, IStatefulTask<TContext, TStateId>;
 
     public delegate TStateId StatefulTaskDoAction<TContext, TStateId>(TContext context);
@@ -35,22 +35,6 @@ namespace Items.StateMachine.V4
 
     public static class StateMachineExtensions
     {
-        public static IStateMachineBuilderWithoutStateId<TContext, TStateId, TStatefulTask> FillWithTransitionsTable<TContext, TStateId, TStatefulTask>(
-            this TStatefulTask initialTask,
-            IStateMachineFactory<TContext, TStateId, TStatefulTask> factory)
-            where TStatefulTask : class, IStatefulTask<TContext, TStateId>
-        {
-            return factory.FillWithTransitionsTable(initialTask);
-        }
-
-        public static IStateMachineBuilderWithoutStateId<TContext, TStateId, TStatefulTask> FillWithTransitionsTable<TContext, TStateId, TStatefulTask>(
-            this TStatefulTask initialTask,
-            FillWithTransitionsTableAction<TContext, TStateId, TStatefulTask> factoryAction)
-            where TStatefulTask : class, IStatefulTask<TContext, TStateId>
-        {
-            return factoryAction(initialTask);
-        }
-
         // To simplify call (no need in generic arguments).
         public static IStateMachineBuilderWithoutStateId<TContext, TStateId, IStatefulTask<TContext, TStateId>> AsInitial<TContext, TStateId>(
             this IStatefulTask<TContext, TStateId> initialTask,
